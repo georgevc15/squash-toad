@@ -44,13 +44,13 @@ public class FrogMovement : MonoBehaviour {
         if (GvrViewer.Instance.Triggered && hopCount < jumpSpeedCMPS.Length)
         {
             var camera = GetComponentInChildren<Camera>();
-            Debug.DrawLine(transform.position, camera.transform.forward, Color.black);
+            //Debug.DrawLine(transform.position, camera.transform.forward, Color.black);
             var projectedLookDirection = Vector3.ProjectOnPlane(camera.transform.forward, Vector3.up);
-            Debug.DrawLine(transform.position, projectedLookDirection, Color.blue);
+            //Debug.DrawLine(transform.position, projectedLookDirection, Color.blue);
             var radiansToRotate = Mathf.Deg2Rad * jumpElevationInDegrees;
             var unnormalizedJumpDirection = Vector3.RotateTowards(projectedLookDirection, Vector3.up, radiansToRotate, 0);
             var jumpVector = unnormalizedJumpDirection.normalized * jumpSpeedCMPS[hopCount];
-            Debug.DrawLine(transform.position, jumpVector, Color.cyan);
+            //Debug.DrawLine(transform.position, jumpVector, Color.cyan);
 
             GetComponent<Rigidbody>().AddForce(jumpVector, ForceMode.VelocityChange);
         }
