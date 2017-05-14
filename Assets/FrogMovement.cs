@@ -53,6 +53,8 @@ public class FrogMovement : MonoBehaviour {
             //Debug.DrawLine(transform.position, jumpVector, Color.cyan);
 
             GetComponent<Rigidbody>().AddForce(jumpVector, ForceMode.VelocityChange);
+
+            hopCount++;
         }
 	}
 }
