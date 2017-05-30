@@ -11,15 +11,27 @@ public class LaneSpawner : MonoBehaviour {
     LaneType lastLaneType = LaneType.Safe;
     public float safeLaneRunProbability = 0.2f;
     public float laneSpawnDistance = 50000; //meters
+    public GameObject player;
+
+
+    int offset = 0;
 
     // Use this for initialization
-    void Start () {
-        int offset = 0;
-        while (offset < laneSpawnDistance) 
+    void Update () {
+        while (offset < laneSpawnDistance + player.transform.position.z) 
         {
             CreateRandomLane(offset);
             offset += 1000;
         }
+        foreach (Transform laneTransform in this.transform)
+        {
+            if (laneTransform.transform.position.z + laneSpawnDistance < player.transform.position.z)
+            {
+                //Destroy lane
+                Destroy(laneTransform.gameObject);
+            }
+        }
+
     }
 
     void CreateRandomLane(float offset)
@@ -55,8 +67,4 @@ public class LaneSpawner : MonoBehaviour {
         return Instantiate(lanes[laneIndex]);
     }
 
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
